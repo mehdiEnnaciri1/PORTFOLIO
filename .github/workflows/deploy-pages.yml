@@ -30,7 +30,13 @@ jobs:
         run: npm ci
 
       - name: Build (static export)
+        env:
+          NODE_ENV: production
+          CI: "true"
         run: npm run build
+
+      - name: Check out directory
+        run: ls -la out || true
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
