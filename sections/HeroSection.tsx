@@ -7,6 +7,8 @@ import { ArrowRight, FileDown, FileText, Github, Instagram, Linkedin } from "luc
 const gradientText =
   "bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export function HeroSection() {
   return (
     <section
@@ -31,7 +33,7 @@ export function HeroSection() {
                 className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-900 shadow-lg shadow-slate-950/70 sm:h-24 sm:w-24 md:h-28 md:w-28"
               >
                 <Image
-                  src="/mehdi.jfif"
+                  src={`${basePath}/mehdi.jfif`}
                   alt="Photo de Mehdi Ennaciri"
                   fill
                   className="object-cover"
@@ -106,7 +108,7 @@ export function HeroSection() {
               </button>
 
               <a
-                href="/CV_Mehdi_ENNACIRI_FR.pdf"
+                href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-950/70 px-4 py-2 text-sm font-medium text-slate-100 shadow-lg shadow-slate-950/70 hover:bg-slate-900 hover:border-indigo-500/50"
@@ -115,7 +117,7 @@ export function HeroSection() {
                 Voir le CV
               </a>
               <a
-                href="/CV_Mehdi_ENNACIRI_FR.pdf"
+                href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
                 download="CV_Mehdi_ENNACIRI_FR.pdf"
                 target="_blank"
                 rel="noopener noreferrer"

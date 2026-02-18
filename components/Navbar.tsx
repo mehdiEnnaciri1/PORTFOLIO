@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, FileDown, FileText, Menu, X } from "lucide-react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const SECTIONS = [
   { id: "hero", label: "Accueil" },
   { id: "formation", label: "Formation" },
@@ -108,7 +110,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <a
-            href="/CV_Mehdi_ENNACIRI_FR.pdf"
+            href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden items-center gap-1.5 rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-slate-100 hover:border-indigo-500/50 hover:bg-slate-900 md:inline-flex"
@@ -157,7 +159,7 @@ export function Navbar() {
               </button>
             ))}
             <a
-              href="/CV_Mehdi_ENNACIRI_FR.pdf"
+              href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-slate-300 hover:bg-slate-900"
@@ -167,7 +169,7 @@ export function Navbar() {
               Voir le CV
             </a>
             <a
-              href="/CV_Mehdi_ENNACIRI_FR.pdf"
+              href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
               download="CV_Mehdi_ENNACIRI_FR.pdf"
               target="_blank"
               rel="noopener noreferrer"
