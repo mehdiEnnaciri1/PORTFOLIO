@@ -91,7 +91,7 @@ const projects = [
     title: "Clementia",
     type: "Plateforme IA · Full-Stack",
     description:
-      "Plateforme de supervision d'appels pilotée par l'IA : campagnes Inbound/Outbound, agents conversationnels (GPT-4), transcription temps réel (Whisper), analyse vocale (Parselmouth/Praat) et qualification automatique. Intégration LiveKit (VoIP/SIP), Calendly, stack React/TypeScript/Vite + FastAPI/PostgreSQL/Redis/Celery.",
+      "Plateforme de supervision d'appels pilotée par l'IA, construite sur une architecture microservices et des services asynchrones (Celery, Redis). Campagnes Inbound/Outbound, agents conversationnels (GPT-4), transcription temps réel (Whisper), analyse vocale et qualification automatique. Intégration LiveKit (VoIP/SIP), Calendly, stack React/TypeScript/Vite + FastAPI/PostgreSQL/Redis/Celery.",
     tech: [
       "React",
       "TypeScript",
@@ -102,11 +102,16 @@ const projects = [
       "Celery",
       "Docker",
     ],
+    techGroups: {
+      ia: ["OpenAI (GPT-4, Whisper)", "Agents conversationnels"],
+      infrastructure: ["FastAPI", "React / TypeScript", "LiveKit", "Redis", "Celery", "PostgreSQL", "Docker"],
+    },
     features: [
+      "Architecture microservices et services asynchrones (Celery, Redis)",
       "Campagnes Inbound / Outbound",
       "Agents conversationnels (GPT-4)",
       "Transcription temps réel (Whisper)",
-      "Analyse vocale (Parselmouth / Praat)",
+      "Analyse vocale",
       "Qualification automatique des appels",
       "Intégration LiveKit (VoIP / SIP)",
       "Intégration Calendly",
@@ -292,15 +297,42 @@ export function ProjectsSection() {
                 {project.description}
               </p>
 
-              <div className="mb-4 flex flex-wrap gap-1.5">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full bg-slate-900/80 px-2 py-1 text-[0.7rem] font-medium text-slate-200 ring-1 ring-slate-700/70"
-                  >
-                    {t}
-                  </span>
-                ))}
+              <div className="mb-4 space-y-2">
+                {"techGroups" in project && project.techGroups ? (
+                  <>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.techGroups.ia.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-full bg-emerald-500/15 px-2 py-1 text-[0.7rem] font-medium text-emerald-300 ring-1 ring-emerald-400/40"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.techGroups.infrastructure.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-full bg-sky-500/15 px-2 py-1 text-[0.7rem] font-medium text-sky-300 ring-1 ring-sky-400/40"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full bg-slate-900/80 px-2 py-1 text-[0.7rem] font-medium text-slate-200 ring-1 ring-slate-700/70"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="mt-auto flex gap-2">
@@ -416,16 +448,32 @@ export function ProjectsSection() {
                     <Layers className="h-4 w-4 text-sky-400/80" />
                     Stack technique
                   </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {detailsProject.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-slate-900/80 px-3 py-1.5 text-xs font-medium text-slate-200 ring-1 ring-slate-700/70"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  {"techGroups" in detailsProject && detailsProject.techGroups ? (
+                    <div className="space-y-3">
+                      <div>
+                        <p className="mb-1.5 text-[0.65rem] font-medium uppercase tracking-wider text-emerald-400/90">IA & Modèles</p>
+                        <div className="flex flex-wrap gap-2">
+                          {detailsProject.techGroups.ia.map((t) => (
+                            <span key={t} className="rounded-full bg-emerald-500/15 px-3 py-1.5 text-xs font-medium text-emerald-300 ring-1 ring-emerald-400/40">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="mb-1.5 text-[0.65rem] font-medium uppercase tracking-wider text-sky-400/90">Infrastructure & Back-End</p>
+                        <div className="flex flex-wrap gap-2">
+                          {detailsProject.techGroups.infrastructure.map((t) => (
+                            <span key={t} className="rounded-full bg-sky-500/15 px-3 py-1.5 text-xs font-medium text-sky-300 ring-1 ring-sky-400/40">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-2">
+                      {detailsProject.tech.map((t) => (
+                        <span key={t} className="rounded-full bg-slate-900/80 px-3 py-1.5 text-xs font-medium text-slate-200 ring-1 ring-slate-700/70">{t}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <a

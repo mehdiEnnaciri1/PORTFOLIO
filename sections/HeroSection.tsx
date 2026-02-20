@@ -58,6 +58,9 @@ export function HeroSection() {
             </div>
 
             <div className="w-full max-w-full space-y-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+              <p className={`text-base font-medium sm:text-lg ${gradientText}`}>
+                Software Engineer spécialisé en IA & Full-Stack, actuellement Doctorant en Causal Machine Learning. Je conçois des systèmes complexes alliant performance back-end et intelligence artificielle.
+              </p>
               <p>
                 I am a Computer Engineering graduate with a Bachelor&apos;s degree in Mathematics
                 and Computer Science from Ben M&apos;sik Faculty of Sciences, Casablanca, and a
@@ -75,9 +78,11 @@ export function HeroSection() {
                 practices, testing, refactoring, and performance optimization.
               </p>
               <p>
-                Motivated by continuous learning and innovation, I am open to research
-                collaborations and industry opportunities at the intersection of AI, causality,
-                and data-intensive systems.
+                Polyvalent, j&apos;allie vision par ordinateur (analyse de combats UFC, Ellendir) et
+                dashboards réseau à grande échelle (Orange Maroc), avec une capacité à livrer du
+                code propre, testé et déployé (CI/CD, tests unitaires). Motivated by continuous
+                learning and innovation, I am open to research collaborations and industry
+                opportunities at the intersection of AI, causality, and data-intensive systems.
               </p>
             </div>
 
@@ -130,7 +135,7 @@ export function HeroSection() {
 
             <div className="flex flex-wrap items-center gap-3 text-sm">
               <a
-                href="https://www.linkedin.com"
+                href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-100 hover:border-indigo-500/70 hover:bg-slate-900"

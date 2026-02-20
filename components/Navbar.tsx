@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, FileDown, FileText, Menu, X } from "lucide-react";
+import { ArrowUpRight, FileDown, FileText, Linkedin, Menu, X } from "lucide-react";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -110,6 +110,16 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <a
+            href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1.5 rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-slate-100 hover:border-sky-500/50 hover:bg-slate-900 md:inline-flex"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-3.5 w-3.5 text-sky-400" />
+            LinkedIn
+          </a>
+          <a
             href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
             target="_blank"
             rel="noopener noreferrer"
@@ -121,7 +131,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => handleClick("contact")}
-            className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 px-4 py-1.5 text-xs font-semibold text-slate-950 shadow-lg shadow-indigo-500/40 hover:brightness-110 md:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 px-4 py-1.5 text-xs font-semibold text-slate-950 shadow-lg shadow-indigo-500/40 ring-2 ring-white/10 hover:brightness-110 md:inline-flex"
           >
             Me contacter
             <ArrowUpRight className="h-4 w-4" />
@@ -158,6 +168,16 @@ export function Navbar() {
                 )}
               </button>
             ))}
+            <a
+              href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-slate-300 hover:bg-slate-900"
+              onClick={() => setOpen(false)}
+            >
+              <Linkedin className="h-4 w-4 text-sky-400" />
+              LinkedIn
+            </a>
             <a
               href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
               target="_blank"

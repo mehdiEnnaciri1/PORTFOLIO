@@ -22,7 +22,7 @@ const groups = [
   {
     icon: <GitBranch className="h-4 w-4 text-sky-300" />,
     title: "Outils & DevOps",
-    items: ["Git / GitHub / GitLab", "Docker", "CI/CD", "Monitoring & Logging"],
+    items: ["Git / GitHub / GitLab", "Docker", "CI/CD (GitLab)", "Tests unitaires", "Monitoring & Logging"],
   },
 ];
 
@@ -82,18 +82,18 @@ export function SkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="glass-panel flex flex-col rounded-2xl p-4 md:p-5"
+            className="glass-panel flex min-w-0 flex-col overflow-hidden rounded-2xl p-4 md:p-5"
           >
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-900/80 ring-1 ring-slate-700">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-900/80 ring-1 ring-slate-700">
                 {group.icon}
               </div>
-              <h3 className="text-sm font-semibold text-slate-50 md:text-base">
+              <h3 className="min-w-0 truncate text-sm font-semibold text-slate-50 md:text-base">
                 {group.title}
               </h3>
             </div>
 
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex min-w-0 flex-wrap gap-2 overflow-hidden">
               {group.items.map((item) => (
                 <span
                   key={item}

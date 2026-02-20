@@ -223,7 +223,7 @@ export function ContactSection() {
           </div>
           <div className="flex gap-2">
             <a
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900/80 text-slate-100 ring-1 ring-slate-700/80 hover:ring-sky-400/80"
