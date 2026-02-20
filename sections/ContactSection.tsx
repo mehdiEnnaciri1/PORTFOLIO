@@ -2,7 +2,7 @@
 
 import { FormEvent, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Loader2, Mail, Send, CheckCircle2, AlertCircle, Github, Instagram, Linkedin, Phone } from "lucide-react";
+import { Loader2, Mail, Send, CheckCircle2, AlertCircle, Github, Linkedin } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "";
@@ -18,8 +18,6 @@ const isEmailJSConfigured = () =>
   !PUBLIC_KEY.startsWith("your_");
 
 const CONTACT_EMAIL = "mahdiennaciri9@gmail.com";
-const CONTACT_PHONE = "+212 607996151";
-const CONTACT_PHONE_RAW = "212607996151"; // pour tel: et wa.me (sans espaces)
 
 export function ContactSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
@@ -202,7 +200,7 @@ export function ContactSection() {
             Contact direct
           </h3>
           <p className="mt-2 text-xs text-slate-300 md:text-sm">
-            Vous pouvez également me contacter par email ou téléphone :
+            Vous pouvez me contacter par email :
           </p>
           <p className="mt-2 text-xs font-medium text-slate-100 md:text-sm">
             <a
@@ -210,27 +208,6 @@ export function ContactSection() {
               className="text-indigo-300 hover:underline"
             >
               {CONTACT_EMAIL}
-            </a>
-          </p>
-          <p className="mt-3 text-xs font-medium text-slate-100 md:text-sm">
-            <span className="text-slate-400">Téléphone :</span>{" "}
-            <a
-              href={`tel:+${CONTACT_PHONE_RAW}`}
-              className="inline-flex items-center gap-1 text-indigo-300 hover:underline"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              {CONTACT_PHONE}
-            </a>
-          </p>
-          <p className="mt-1 text-[0.7rem] text-slate-400">
-            Appels ou{" "}
-            <a
-              href={`https://wa.me/${CONTACT_PHONE_RAW}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-emerald-400 hover:underline"
-            >
-              WhatsApp
             </a>
           </p>
         </div>
@@ -253,15 +230,6 @@ export function ContactSection() {
               aria-label="LinkedIn"
             >
               <Linkedin className="h-4 w-4" />
-            </a>
-            <a
-              href="https://www.instagram.com/mehdi_ennaciri1?igsh=MTltcDVtZXYzNmtvag%3D%3D&utm_source=qr"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900/80 text-slate-100 ring-1 ring-slate-700/80 hover:ring-pink-500/80"
-              aria-label="Instagram"
-            >
-              <Instagram className="h-4 w-4" />
             </a>
             <a
               href="https://github.com"

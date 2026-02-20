@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, FileDown, FileText, Github, Instagram, Linkedin } from "lucide-react";
+import { ArrowRight, FileDown, FileText, Github, Linkedin } from "lucide-react";
 
 const gradientText =
   "bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent";
@@ -57,7 +57,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="max-w-2xl space-y-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+            <div className="w-full max-w-full space-y-4 text-sm leading-relaxed text-slate-300 sm:text-base">
               <p>
                 I am a Computer Engineering graduate with a Bachelor&apos;s degree in Mathematics
                 and Computer Science from Ben M&apos;sik Faculty of Sciences, Casablanca, and a
@@ -128,13 +128,6 @@ export function HeroSection() {
               </a>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                <span>Full-Stack · AI & Causal ML · Data Engineering</span>
-              </div>
-            </div>
-
             <div className="flex flex-wrap items-center gap-3 text-sm">
               <a
                 href="https://www.linkedin.com"
@@ -144,15 +137,6 @@ export function HeroSection() {
               >
                 <Linkedin className="h-4 w-4 text-sky-400" />
                 <span className="text-xs font-medium">LinkedIn</span>
-              </a>
-              <a
-                href="https://www.instagram.com/mehdi_ennaciri1?igsh=MTltcDVtZXYzNmtvag%3D%3D&utm_source=qr"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-100 hover:border-pink-500/70 hover:bg-slate-900"
-              >
-                <Instagram className="h-4 w-4 text-pink-400" />
-                <span className="text-xs font-medium">Instagram</span>
               </a>
               <a
                 href="https://github.com"

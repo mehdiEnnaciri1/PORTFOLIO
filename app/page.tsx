@@ -64,6 +64,10 @@ export default function Home() {
         </SectionShell>
       </main>
 
+      <footer className="border-t border-slate-800/80 bg-slate-950/80 py-4 text-center text-xs text-slate-500">
+        © {new Date().getFullYear()} Mehdi Ennaciri. Tous droits réservés.
+      </footer>
+
       <BackToTopButton />
     </div>
   );

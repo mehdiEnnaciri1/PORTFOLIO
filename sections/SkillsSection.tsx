@@ -74,7 +74,7 @@ const softSkills = [
 export function SkillsSection() {
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
         {groups.map((group, index) => (
           <motion.div
             key={group.title}
