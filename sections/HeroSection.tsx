@@ -144,7 +144,7 @@ export function HeroSection() {
                 <span className="text-xs font-medium">LinkedIn</span>
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/mehdiEnnaciri1"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-100 hover:border-emerald-400/70 hover:bg-slate-900"

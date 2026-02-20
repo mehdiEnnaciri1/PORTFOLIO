@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, FileDown, FileText, Linkedin, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, FileText, Github, Linkedin, Menu, X } from "lucide-react";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -21,10 +21,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-
+    const onScroll = () => setScrolled(window.scrollY > 24);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -34,7 +31,7 @@ export function Navbar() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.25, rootMargin: "-80px 0px 0px 0px" }
     );
 
     SECTIONS.forEach((section) => {
@@ -43,7 +40,6 @@ export function Navbar() {
     });
 
     window.addEventListener("scroll", onScroll);
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
@@ -51,158 +47,190 @@ export function Navbar() {
   }, []);
 
   const handleClick = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      setOpen(false);
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setOpen(false);
   };
 
   return (
     <motion.header
-      initial={{ y: -32, opacity: 0 }}
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`sticky top-0 z-40 border-b border-slate-800/60 backdrop-blur-xl transition-colors ${
-        scrolled ? "bg-slate-950/80" : "bg-slate-950/40"
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-slate-800/80 bg-slate-950/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+          : "border-b border-slate-800/40 bg-slate-950/50 backdrop-blur-md"
       }`}
     >
-      <div className="container-xl flex h-16 items-center justify-between gap-4">
+      <div className="container-xl flex h-14 items-center justify-between gap-4 sm:h-16">
+        {/* Logo / Name */}
         <button
           type="button"
           onClick={() => handleClick("hero")}
-          className="flex items-center gap-2 text-sm font-semibold tracking-tight text-slate-50"
+          className="flex shrink-0 items-center gap-2.5 rounded-lg py-1.5 pr-2 transition-colors hover:bg-slate-800/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 focus:ring-offset-slate-950"
+          aria-label="Retour à l'accueil"
         >
-          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-emerald-400 text-xs font-bold text-slate-950 shadow-lg shadow-indigo-500/40">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-500 text-sm font-bold text-white shadow-md shadow-indigo-500/30">
             ME
           </span>
-          <span className="hidden text-sm md:inline">
+          <span className="hidden text-sm font-semibold text-slate-100 sm:inline">
             Mehdi Ennaciri
-            <span className="ml-1 text-xs font-normal text-slate-400">
-              / Software Engineer
-            </span>
           </span>
         </button>
 
-        <nav className="hidden items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-2 py-1 text-xs text-slate-300 shadow-lg shadow-slate-950/50 md:flex">
-          {SECTIONS.map((section) => (
-            <button
-              key={section.id}
-              type="button"
-              onClick={() => handleClick(section.id)}
-              className={`relative rounded-full px-3 py-1 transition-colors ${
-                active === section.id
-                  ? "text-slate-50"
-                  : "text-slate-400 hover:text-slate-100"
-              }`}
-            >
-              {active === section.id && (
-                <motion.span
-                  layoutId="nav-pill"
-                  className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-indigo-500/90 to-emerald-400/90"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{section.label}</span>
-            </button>
-          ))}
+        {/* Desktop nav */}
+        <nav className="hidden flex-1 justify-center lg:flex" aria-label="Navigation principale">
+          <ul className="flex items-center gap-0.5 rounded-full bg-slate-900/70 p-1 ring-1 ring-slate-700/60">
+            {SECTIONS.map((section) => (
+              <li key={section.id}>
+                <button
+                  type="button"
+                  onClick={() => handleClick(section.id)}
+                  className={`relative rounded-full px-4 py-2 text-[0.8125rem] font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${
+                    active === section.id ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
+                  }`}
+                >
+                  {active === section.id && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500/90"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{section.label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-2 lg:flex">
           <a
             href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-1.5 rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-slate-100 hover:border-sky-500/50 hover:bg-slate-900 md:inline-flex"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/50 text-slate-400 transition-colors hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 focus:ring-offset-slate-950"
             aria-label="LinkedIn"
           >
-            <Linkedin className="h-3.5 w-3.5 text-sky-400" />
-            LinkedIn
+            <Linkedin className="h-4 w-4" />
           </a>
+          <a
+            href="https://github.com/mehdiEnnaciri1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/50 text-slate-400 transition-colors hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-slate-950"
+            aria-label="GitHub"
+          >
+            <Github className="h-4 w-4" />
+          </a>
+          <span className="mx-1 h-4 w-px bg-slate-700" aria-hidden="true" />
           <a
             href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-1.5 rounded-full border border-slate-700 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-slate-100 hover:border-indigo-500/50 hover:bg-slate-900 md:inline-flex"
+            className="flex items-center gap-1.5 rounded-lg border border-slate-700/80 bg-slate-800/50 px-3 py-2 text-[0.8125rem] font-medium text-slate-300 transition-colors hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             <FileText className="h-3.5 w-3.5" />
-            Voir le CV
+            CV
           </a>
           <button
             type="button"
             onClick={() => handleClick("contact")}
-            className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 px-4 py-1.5 text-xs font-semibold text-slate-950 shadow-lg shadow-indigo-500/40 ring-2 ring-white/10 hover:brightness-110 md:inline-flex"
+            className="flex items-center gap-1.5 rounded-lg border border-indigo-500/50 bg-gradient-to-r from-indigo-500 to-emerald-500 px-4 py-2 text-[0.8125rem] font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:brightness-110 hover:shadow-indigo-500/40 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-950"
           >
             Me contacter
-            <ArrowUpRight className="h-4 w-4" />
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </button>
+        </div>
 
+        {/* Mobile: menu button */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <a
+            href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/50 text-slate-400 hover:border-indigo-500/50 hover:text-indigo-300"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-4 w-4" />
+          </a>
+          <a
+            href="https://github.com/mehdiEnnaciri1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/50 text-slate-400 hover:border-emerald-500/50 hover:text-emerald-300"
+            aria-label="GitHub"
+          >
+            <Github className="h-4 w-4" />
+          </a>
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 p-1.5 text-slate-200 shadow-lg shadow-slate-950/60 md:hidden"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Ouvrir la navigation"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/50 text-slate-200 hover:border-indigo-500/50 hover:bg-indigo-500/10"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {open && (
-        <div className="border-t border-slate-800 bg-slate-950/95 py-3 md:hidden">
-          <div className="container-xl flex flex-col gap-1 text-sm text-slate-100">
-            {SECTIONS.map((section) => (
-              <button
-                key={section.id}
-                type="button"
-                onClick={() => handleClick(section.id)}
-                className={`flex items-center justify-between rounded-lg px-2 py-1.5 text-left ${
-                  active === section.id
-                    ? "bg-gradient-to-r from-indigo-500/20 to-emerald-400/20 text-slate-50"
-                    : "text-slate-300 hover:bg-slate-900"
-                }`}
-              >
-                <span>{section.label}</span>
-                {active === section.id && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                )}
-              </button>
-            ))}
-            <a
-              href="https://www.linkedin.com/in/mehdi-ennaciri-099a4925b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-slate-300 hover:bg-slate-900"
-              onClick={() => setOpen(false)}
-            >
-              <Linkedin className="h-4 w-4 text-sky-400" />
-              LinkedIn
-            </a>
-            <a
-              href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-slate-300 hover:bg-slate-900"
-              onClick={() => setOpen(false)}
-            >
-              <FileText className="h-4 w-4" />
-              Voir le CV
-            </a>
-            <a
-              href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
-              download="CV_Mehdi_ENNACIRI_FR.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-slate-300 hover:bg-slate-900"
-              onClick={() => setOpen(false)}
-            >
-              <FileDown className="h-4 w-4" />
-              Télécharger mon CV
-            </a>
-          </div>
-        </div>
-      )}
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="overflow-hidden border-t border-slate-800 bg-slate-950/98 backdrop-blur-xl lg:hidden"
+          >
+            <nav className="container-xl py-4" aria-label="Navigation mobile">
+              <ul className="space-y-0.5">
+                {SECTIONS.map((section) => (
+                  <li key={section.id}>
+                    <button
+                      type="button"
+                      onClick={() => handleClick(section.id)}
+                      className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors ${
+                        active === section.id
+                          ? "bg-indigo-500/15 text-indigo-300"
+                          : "text-slate-300 hover:bg-slate-800/70 hover:text-slate-100"
+                      }`}
+                    >
+                      {section.label}
+                      {active === section.id && (
+                        <span className="h-2 w-2 rounded-full bg-indigo-400" />
+                      )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-800 pt-4">
+                <a
+                  href={`${basePath}/CV_Mehdi_ENNACIRI_FR.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-700/80 bg-slate-800/50 px-4 py-2.5 text-sm font-medium text-slate-300 hover:border-indigo-500/50 hover:bg-indigo-500/10 hover:text-slate-100"
+                >
+                  <FileText className="h-4 w-4" />
+                  Télécharger le CV
+                </a>
+                <button
+                  type="button"
+                  onClick={() => handleClick("contact")}
+                  className="inline-flex items-center gap-2 rounded-lg border border-indigo-500/50 bg-gradient-to-r from-indigo-500 to-emerald-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30"
+                >
+                  Me contacter
+                  <ArrowUpRight className="h-4 w-4" />
+                </button>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
-

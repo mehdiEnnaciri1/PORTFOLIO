@@ -232,7 +232,7 @@ export function ContactSection() {
               <Linkedin className="h-4 w-4" />
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/mehdiEnnaciri1"
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900/80 text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
