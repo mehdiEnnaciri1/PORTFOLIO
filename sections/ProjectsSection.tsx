@@ -116,7 +116,7 @@ const projects = [
       "Intégration LiveKit (VoIP / SIP)",
       "Intégration Calendly",
     ],
-    links: { github: "https://github.com/mehdiEnnaciri1/CLEMENTIA" },
+    links: { github: "" },
     icon: <Phone className="h-5 w-5 text-emerald-300" />,
     image: "clementia.png",
   },
@@ -202,7 +202,7 @@ const projects = [
       "Extraction des points clés biomécaniques avec YOLOv8-pose",
       "Analyse des positions des combattants dans l'octogone",
     ],
-    links: { github: "https://github.com/mehdiEnnaciri1/UFC_Computer_Vision" },
+    links: { github: "" },
     icon: <Activity className="h-5 w-5 text-rose-400" />,
     image: "ufc1.png",
   },
@@ -339,20 +339,22 @@ export function ProjectsSection() {
                 <button
                   type="button"
                   onClick={() => setDetailsProject(project)}
-                  className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-indigo-400/80"
+                  className={`inline-flex items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-indigo-400/80 ${project.links.github ? "flex-1" : "w-full"}`}
                 >
                   Détails
                   <Layers className="h-3 w-3" />
                 </button>
-                <a
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
-                >
-                  GitHub
-                  <ArrowUpRight className="h-3 w-3" />
-                </a>
+                {project.links.github ? (
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
+                  >
+                    GitHub
+                    <ArrowUpRight className="h-3 w-3" />
+                  </a>
+                ) : null}
               </div>
             </div>
           </motion.article>
@@ -476,15 +478,17 @@ export function ProjectsSection() {
                   )}
                 </div>
 
-                <a
-                  href={detailsProject.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900/90 py-2.5 text-sm font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
-                >
-                  Voir sur GitHub
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
+                {detailsProject.links.github ? (
+                  <a
+                    href={detailsProject.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900/90 py-2.5 text-sm font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
+                  >
+                    Voir sur GitHub
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                ) : null}
               </div>
             </motion.div>
           </motion.div>
