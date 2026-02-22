@@ -8,6 +8,7 @@ import {
   Bell,
   LayoutDashboard,
   Phone,
+  Sparkles,
   Wifi,
   X,
   Layers,
@@ -236,6 +237,36 @@ const projects = [
     icon: <LayoutDashboard className="h-5 w-5 text-blue-400" />,
     images: ["laravel1.png", "laravel2.png", "laravel3.png"],
   },
+  {
+    title: "Multi-Label Classification",
+    type: "Multi-Label Image & Text · Deep Learning",
+    description:
+      "Participation à la compétition Kaggle \"Multi-label Classification Competition 2023\". Modèle de classification multi-label combinant Computer Vision et NLP : classification d'images et de descriptions textuelles via une architecture hybride (EfficientNet + RoBERTa/LSTM).",
+    tech: [
+      "Python",
+      "PyTorch",
+      "EfficientNet",
+      "RoBERTa",
+      "LSTM",
+      "Pandas",
+      "NumPy",
+      "Kaggle Notebooks",
+    ],
+    features: [
+      "Classification multi-label d'images et de captions",
+      "Extraction des caractéristiques visuelles avec EfficientNet",
+      "Traitement des descriptions textuelles avec RoBERTa et LSTM",
+      "Fusion des caractéristiques image et texte pour la prédiction",
+      "Optimisation avec torch.no_grad() en phase d'inférence",
+    ],
+    links: {
+      github: "",
+      kaggle:
+        "https://www.kaggle.com/code/firdaouscharchaoui/multi-label-classification-project-final",
+    },
+    icon: <Sparkles className="h-5 w-5 text-amber-400" />,
+    image: "kaggle.jpg",
+  },
 ];
 
 type Project = (typeof projects)[number];
@@ -339,7 +370,7 @@ export function ProjectsSection() {
                 <button
                   type="button"
                   onClick={() => setDetailsProject(project)}
-                  className={`inline-flex items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-indigo-400/80 ${project.links.github ? "flex-1" : "w-full"}`}
+                  className={`inline-flex items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-indigo-400/80 ${project.links.github || ("kaggle" in project.links && project.links.kaggle) ? "flex-1" : "w-full"}`}
                 >
                   Détails
                   <Layers className="h-3 w-3" />
@@ -352,6 +383,17 @@ export function ProjectsSection() {
                     className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
                   >
                     GitHub
+                    <ArrowUpRight className="h-3 w-3" />
+                  </a>
+                ) : null}
+                {"kaggle" in project.links && project.links.kaggle ? (
+                  <a
+                    href={project.links.kaggle}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-slate-900/90 px-2 py-1.5 text-[0.72rem] font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-amber-400/80"
+                  >
+                    Kaggle
                     <ArrowUpRight className="h-3 w-3" />
                   </a>
                 ) : null}
@@ -478,16 +520,34 @@ export function ProjectsSection() {
                   )}
                 </div>
 
-                {detailsProject.links.github ? (
-                  <a
-                    href={detailsProject.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900/90 py-2.5 text-sm font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80"
-                  >
-                    Voir sur GitHub
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
+                {(detailsProject.links.github ||
+                  ("kaggle" in detailsProject.links &&
+                    detailsProject.links.kaggle)) ? (
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    {detailsProject.links.github ? (
+                      <a
+                        href={detailsProject.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900/90 py-2.5 text-sm font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-emerald-400/80 sm:flex-1"
+                      >
+                        Voir sur GitHub
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    ) : null}
+                    {"kaggle" in detailsProject.links &&
+                    detailsProject.links.kaggle ? (
+                      <a
+                        href={detailsProject.links.kaggle}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900/90 py-2.5 text-sm font-medium text-slate-100 ring-1 ring-slate-700/80 hover:ring-amber-400/80 sm:flex-1"
+                      >
+                        Voir sur Kaggle
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
+                    ) : null}
+                  </div>
                 ) : null}
               </div>
             </motion.div>
