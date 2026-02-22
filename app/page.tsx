@@ -59,7 +59,7 @@ export default function Home() {
           eyebrow="Travaillons ensemble"
           title="Contact"
           description="Vous avez un projet, une opportunité ou une idée à challenger ? Parlons-en."
-        >
+            >
           <ContactSection />
         </SectionShell>
       </main>
