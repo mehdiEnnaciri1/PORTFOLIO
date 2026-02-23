@@ -8,7 +8,9 @@ import {
   Bell,
   LayoutDashboard,
   Phone,
+  Smartphone,
   Sparkles,
+  Users,
   Wifi,
   X,
   Layers,
@@ -259,6 +261,7 @@ const projects = [
       "Fusion des caractéristiques image et texte pour la prédiction",
       "Optimisation avec torch.no_grad() en phase d'inférence",
     ],
+
     links: {
       github: "",
       kaggle:
@@ -266,6 +269,61 @@ const projects = [
     },
     icon: <Sparkles className="h-5 w-5 text-amber-400" />,
     image: "kaggle.jpg",
+  },
+  {
+    title: "PODOMETRE",
+    type: "Application Mobile · IoT & Santé",
+    description:
+      "Application mobile de podomètre en React Native (iOS et Android). Suivi des pas en temps réel, estimation des calories brûlées, mesure de la vitesse et objectifs personnalisés. Architecture IoT : collecte et traitement des données de mouvement (accéléromètre), algorithmes d'optimisation pour la précision du comptage et le calcul des calories, interface réactive avec graphiques de performance, gestion de l'autonomie batterie.",
+    tech: [
+      "React Native",
+      "iOS & Android",
+      "Accéléromètre / Capteurs",
+      "Algorithmes d'analyse de signal",
+      "Firebase",
+      "UX/UI",
+    ],
+    features: [
+      "Suivi des pas en temps réel",
+      "Estimation des calories brûlées",
+      "Mesure de la vitesse",
+      "Objectifs personnalisés",
+      "Collecte et traitement des données de mouvement (architecture IoT)",
+      "Algorithmes d'optimisation pour la précision du comptage",
+      "Interface réactive avec graphiques de performance",
+      "Gestion de l'autonomie batterie et précision des capteurs",
+    ],
+    links: { github: "https://github.com/mehdiEnnaciri1/PODOMETRE" },
+    icon: <Smartphone className="h-5 w-5 text-violet-400" />,
+    image: "podometre.png",
+  },
+  {
+    title: "Gestion Employés",
+    type: "Full-Stack · Spring Boot & Angular",
+    description:
+      "Application web full-stack pour gérer départements et employés : CRUD complet, association employés par département avec nom, âge et photo. Backend API REST Spring Boot 3 (Java 17, JPA, MySQL), frontend Angular 18 (standalone) avec design unifié, upload de photos (PNG/JPG jusqu'à 10 Mo).",
+    tech: [
+      "Java 17",
+      "Spring Boot 3",
+      "Spring Data JPA",
+      "MySQL",
+      "Maven",
+      "Angular 18",
+      "TypeScript",
+      "RxJS",
+      "SCSS",
+    ],
+    features: [
+      "CRUD départements et employés par département",
+      "Upload de photos employés (PNG/JPG, max 10 Mo)",
+      "API REST (départements, employés, photos)",
+      "Frontend Angular 18 standalone, routing",
+      "Interface unifiée : Accueil, Départements, détail avec grille de cartes employés",
+      "CORS configuré, design cohérent (modals, tableaux, cartes)",
+    ],
+    links: { github: "https://github.com/mehdiEnnaciri1/AngularSpring" },
+    icon: <Users className="h-5 w-5 text-teal-400" />,
+    image: "employe.png",
   },
 ];
 

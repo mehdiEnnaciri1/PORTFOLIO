@@ -49,7 +49,7 @@ export default function Home() {
           id="projects"
           eyebrow="Sélection de projets"
           title="Projets Full-Stack & IA"
-          description="Quelques projets représentatifs autour de la classification multimodale, de l'architecture data et des applications web modernes."
+          description="Quelques projets représentatifs : IA, architecture data et applications web. Certains projets n'affichent pas de lien GitHub car ils sont confidentiels et appartiennent à des entreprises (raisons de sécurité)."
         >
           <ProjectsSection />
         </SectionShell>
