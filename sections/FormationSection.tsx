@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const items = [
   {
     title: "Doctor of Philosophy - PhD, Artificial Intelligence & Causal Machine Learning",
@@ -47,6 +49,24 @@ const items = [
 export function FormationSection() {
   return (
     <div className="relative">
+      <div className="fgrid rv">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <figure className="fpic">
+          <img src={`${basePath}/fac1.jpg`} alt="Faculté des Sciences Ben M'sik" />
+          <figcaption>Faculté des Sciences Ben M&apos;sik · Casablanca</figcaption>
+        </figure>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <figure className="fpic">
+          <img src={`${basePath}/fac2.jpg`} alt="Faculté des Sciences, Tétouan" />
+          <figcaption>Faculté des Sciences · Tétouan</figcaption>
+        </figure>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <figure className="fpic">
+          <img src={`${basePath}/fac3.jpg`} alt="Université Abdelmalek Essaâdi" />
+          <figcaption>Université Abdelmalek Essaâdi · Tétouan</figcaption>
+        </figure>
+      </div>
+
       <div className="absolute left-4 top-3 bottom-3 w-px bg-gradient-to-b from-indigo-500/60 via-slate-700/80 to-emerald-400/60 md:left-1/2 md:-translate-x-px" />
 
       <div className="space-y-8 md:space-y-10">

@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import "@fontsource/bebas-neue/400.css";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/jetbrains-mono/400.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className="bg-slate-950 text-slate-100 antialiased">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
