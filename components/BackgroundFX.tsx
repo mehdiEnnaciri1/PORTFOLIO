@@ -3,10 +3,11 @@
 import { useEffect } from "react";
 
 /**
- * Effets de fond globaux :
+ * Effets de fond globaux (v2 — Silk Wave) :
  * - grain cinéma
- * - halos bleus dérivants (réagissent au scroll)
- * - tracé causal : chemin ondulant + paquet de données + nœuds par section
+ * - vague de soie lumineuse qui ondule avec le scroll (remplace le serpent)
+ * - horizon lumineux pulsant en bas du hero
+ * - poussière d'étoiles scintillante avec parallax
  * - reveal au scroll (.rv → .vis)
  * - parallax du hero (#hbg)
  */
@@ -26,150 +27,120 @@ export function BackgroundFX() {
     );
     document.querySelectorAll(".rv").forEach((el) => io.observe(el));
 
-    const state: { len: number; top: number; h: number; nodes: { el: SVGGElement; l: number }[] } = {
-      len: 0,
-      top: 0,
-      h: 0,
-      nodes: [],
-    };
-
-    const buildSnake = () => {
-      const svg = document.getElementById("snakesvg") as SVGSVGElement | null;
-      const hero = document.getElementById("hero");
-      const contact = document.getElementById("contact");
-      const wrap = document.getElementById("snake");
-      if (!svg || !hero || !contact || !wrap) return;
-      const w = document.documentElement.clientWidth;
-      const top = hero.offsetTop + hero.offsetHeight;
-      const end = contact.offsetTop + contact.offsetHeight * 0.75;
-      const h = Math.max(600, end - top);
-      wrap.style.top = top + "px";
-      wrap.style.height = h + "px";
-      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-      const A = Math.min(w * 0.17, 320);
-      const cx = w / 2;
-      const seg = Math.max(560, h / 10);
-      let d = `M ${cx} 0`;
-      let x = cx, y = 0, dir = 1;
-      while (y < h - 10) {
-        const ny = Math.min(h, y + seg);
-        const nx = cx + dir * A;
-        d += ` C ${x} ${y + seg * 0.55}, ${nx} ${ny - seg * 0.55}, ${nx} ${ny}`;
-        x = nx; y = ny; dir = -dir;
-      }
-      const path = document.getElementById("snakepath") as unknown as SVGPathElement;
-      const trail = document.getElementById("snaketrail") as unknown as SVGPathElement;
-      path.setAttribute("d", d);
-      trail.setAttribute("d", d);
-      const len = path.getTotalLength();
-      path.style.strokeDasharray = String(len);
-      path.style.strokeDashoffset = String(len);
-      state.len = len; state.top = top; state.h = h;
-      svg.querySelectorAll("g.snode").forEach((n) => n.remove());
-      state.nodes = [];
-      const N = 260;
-      const samples: { l: number; x: number; y: number }[] = [];
-      for (let i = 0; i <= N; i++) {
-        const pt = path.getPointAtLength((len * i) / N);
-        samples.push({ l: (len * i) / N, x: pt.x, y: pt.y });
-      }
-      const ns = "http://www.w3.org/2000/svg";
-      ["profil", "skills", "experience", "projects", "formation", "contact"].forEach((id) => {
-        const s = document.getElementById(id);
-        if (!s) return;
-        const ty = s.offsetTop + 160 - top;
-        if (ty < 20 || ty > h - 20) return;
-        let best = samples[0];
-        samples.forEach((pt) => {
-          if (Math.abs(pt.y - ty) < Math.abs(best.y - ty)) best = pt;
-        });
-        const g = document.createElementNS(ns, "g") as SVGGElement;
-        g.setAttribute("class", "snode");
-        const ring = document.createElementNS(ns, "circle");
-        ring.setAttribute("class", "nring");
-        ring.setAttribute("cx", String(best.x)); ring.setAttribute("cy", String(best.y)); ring.setAttribute("r", "9");
-        const dot = document.createElementNS(ns, "circle");
-        dot.setAttribute("class", "ndot");
-        dot.setAttribute("cx", String(best.x)); dot.setAttribute("cy", String(best.y)); dot.setAttribute("r", "3.5");
-        g.appendChild(ring); g.appendChild(dot);
-        svg.insertBefore(g, document.getElementById("snakeball"));
-        state.nodes.push({ el: g, l: best.l });
-      });
-      updateSnake(window.scrollY);
-    };
-
-    const updateSnake = (y: number) => {
-      if (!state.len) return;
-      const path = document.getElementById("snakepath") as unknown as SVGPathElement;
-      const ball = document.getElementById("snakeball");
-      const halo = document.getElementById("snakehalo");
-      if (!path || !ball || !halo) return;
-      const cur = y + window.innerHeight * 0.6 - state.top;
-      const p = Math.max(0, Math.min(1, cur / state.h));
-      const L = state.len * p;
-      path.style.strokeDashoffset = String(state.len - L);
-      const pt = path.getPointAtLength(L);
-      ball.setAttribute("cx", String(pt.x)); ball.setAttribute("cy", String(pt.y));
-      halo.setAttribute("cx", String(pt.x)); halo.setAttribute("cy", String(pt.y));
-      const show = p > 0.004 && p < 0.996;
-      (ball as unknown as SVGElement).style.opacity = show ? "1" : "0";
-      (halo as unknown as SVGElement).style.opacity = show ? "1" : "0";
-      state.nodes.forEach((n) => n.el.classList.toggle("lit", L >= n.l - 4));
-    };
-
+    let sy = window.scrollY;
     const hbg = document.getElementById("hbg");
-    const b1 = document.querySelector<HTMLElement>(".b1");
-    const b2 = document.querySelector<HTMLElement>(".b2");
-    const b3 = document.querySelector<HTMLElement>(".b3");
     const onScroll = () => {
-      const y = window.scrollY;
-      if (y < window.innerHeight * 1.2 && hbg) {
-        hbg.style.transform = `translateY(${Math.min(y * 0.22, window.innerHeight * 0.38)}px) scale(1.05)`;
+      sy = window.scrollY;
+      if (sy < window.innerHeight * 1.2 && hbg) {
+        hbg.style.transform = `translateY(${Math.min(sy * 0.22, window.innerHeight * 0.38)}px) scale(1.05)`;
       }
-      const p = y * 0.0006;
-      if (b1) { b1.style.rotate = `${p * 40}deg`; b1.style.translate = `0 ${Math.sin(p * 2) * 40}px`; }
-      if (b2) b2.style.translate = `${Math.cos(p * 2.4) * 50}px ${-y * 0.03}px`;
-      if (b3) b3.style.translate = `${Math.sin(p * 1.8) * 60}px ${y * 0.02}px`;
-      updateSnake(y);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Poussière d'étoiles
+    const dust = Array.from({ length: 90 }, () => ({
+      x: Math.random(), y: Math.random(), r: Math.random() * 1.4 + 0.3,
+      tw: Math.random() * 6.28, sp: 0.2 + Math.random() * 0.6,
+    }));
+
+    const silk = (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+      ctx.globalCompositeOperation = "lighter";
+      const N = 34;
+      const cx = w * (0.62 - 0.22 * Math.sin(sy * 0.00045));
+      const cy = h * 0.52 + Math.sin(sy * 0.0006) * h * 0.22;
+      for (let k = 0; k < N; k++) {
+        const f = k / (N - 1);
+        const spread = (f - 0.5) * h * 0.42;
+        const tw = Math.sin(t * 0.22 + f * 2.4);
+        ctx.beginPath();
+        for (let i = 0; i <= 60; i++) {
+          const u = i / 60;
+          const x = -80 + u * (w + 160);
+          const bend = Math.sin(u * 2.6 + t * 0.3 + f * 1.1) * h * 0.16;
+          const pinch = Math.sin(u * 3.14);
+          const y = cy + (x - cx) * 0.34 + bend + spread * (0.25 + 0.75 * Math.abs(Math.sin(u * 3.14 + tw)));
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          if (pinch < 0) break;
+        }
+        const a = 0.028 + 0.05 * Math.pow(Math.sin(f * 3.14), 2);
+        const grad = ctx.createLinearGradient(0, cy - h * 0.3, w, cy + h * 0.3);
+        grad.addColorStop(0, "rgba(30,80,180,0)");
+        grad.addColorStop(0.4, `rgba(90,170,255,${a.toFixed(3)})`);
+        grad.addColorStop(0.65, `rgba(160,220,255,${(a * 1.5).toFixed(3)})`);
+        grad.addColorStop(1, "rgba(40,100,200,0)");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = "source-over";
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", buildSnake);
-    buildSnake();
-    const t1 = setTimeout(buildSnake, 1500);
-    const t2 = setTimeout(buildSnake, 4000);
+    const stars = (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+      for (const s of dust) {
+        const a = 0.12 + 0.3 * Math.abs(Math.sin(t * s.sp + s.tw));
+        ctx.fillStyle = `rgba(180,215,255,${a.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(s.x * w, ((s.y * h * 2 - sy * 0.06) % h + h) % h, s.r, 0, 6.283);
+        ctx.fill();
+      }
+    };
+
+    const horizon = (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => {
+      const y0 = h * 0.88 - sy * 0.25;
+      if (y0 > -h * 0.3) {
+        ctx.globalCompositeOperation = "lighter";
+        const g = ctx.createRadialGradient(w / 2, y0 + h * 0.55, h * 0.1, w / 2, y0 + h * 0.55, h * 0.9);
+        g.addColorStop(0, "rgba(80,160,255,.28)");
+        g.addColorStop(0.5, "rgba(30,80,180,.1)");
+        g.addColorStop(1, "rgba(10,30,80,0)");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+        const pulse = 0.75 + 0.25 * Math.sin(t * 0.8);
+        ctx.strokeStyle = `rgba(170,220,255,${(0.55 * pulse).toFixed(3)})`;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = "rgba(111,195,255,.9)";
+        ctx.shadowBlur = 22;
+        ctx.beginPath();
+        ctx.ellipse(w / 2, y0 + h * 0.62, w * 0.75, h * 0.6, 0, Math.PI * 1.15, Math.PI * 1.85);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.globalCompositeOperation = "source-over";
+      }
+      stars(ctx, w, h, t);
+    };
+
+    let raf = 0;
+    const draw = (tm: number) => {
+      const t = tm / 1000;
+      const c = document.getElementById("fx") as HTMLCanvasElement | null;
+      if (c) {
+        const w = window.innerWidth, h = window.innerHeight;
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        if (c.width !== w * dpr || c.height !== h * dpr) {
+          c.width = w * dpr; c.height = h * dpr;
+          c.style.width = w + "px"; c.style.height = h + "px";
+        }
+        const ctx = c.getContext("2d")!;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        horizon(ctx, w, h, t);
+        silk(ctx, w, h, t);
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
 
     return () => {
       io.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", buildSnake);
-      clearTimeout(t1); clearTimeout(t2);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
     <>
       <div id="grain" />
-      <div id="flow">
-        <i className="fb b1" />
-        <i className="fb b2" />
-        <i className="fb b3" />
-      </div>
-      <div id="snake">
-        <svg id="snakesvg" width="100%" height="100%">
-          <path id="snaketrail" fill="none" stroke="rgba(122,160,210,.10)" strokeWidth="2" />
-          <path id="snakepath" fill="none" stroke="url(#snakegrad)" strokeWidth="2.5" strokeLinecap="round" />
-          <circle id="snakeball" r="6" />
-          <circle id="snakehalo" r="22" />
-          <defs>
-            <linearGradient id="snakegrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="rgba(111,195,255,.05)" />
-              <stop offset="0.7" stopColor="rgba(111,195,255,.45)" />
-              <stop offset="1" stopColor="rgba(111,195,255,.9)" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+      <canvas id="fx" />
     </>
   );
 }

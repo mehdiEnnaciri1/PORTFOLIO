@@ -21,7 +21,7 @@ export default function Home() {
       <main className="pb-16">
         <HeroSection />
 
-        <SectionShell id="profil" num="01" title="About Me">
+        <SectionShell id="profil" num="01" title="About Me" tint="a">
           <AboutSection />
         </SectionShell>
 
@@ -29,15 +29,15 @@ export default function Home() {
           <SkillsSection />
         </SectionShell>
 
-        <SectionShell id="experience" num="03" title="Expérience">
+        <SectionShell id="experience" num="03" title="Expérience" tint="b">
           <ExperienceSection />
         </SectionShell>
 
-        <SectionShell id="projects" num="04" title="Projets">
+        <SectionShell id="projects" num="04" title="Projets" tint="c">
           <ProjectsSection />
         </SectionShell>
 
-        <SectionShell id="formation" num="05" title="Formation">
+        <SectionShell id="formation" num="05" title="Formation" tint="a">
           <FormationSection />
         </SectionShell>
 
