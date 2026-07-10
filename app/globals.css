@@ -83,6 +83,13 @@ a:hover { color: #fff; }
 .nl:hover { color: #fff; }
 .nl.on { background: rgba(111, 195, 255, 0.14); color: var(--acc); }
 
+.nburger { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: rgba(9, 16, 30, 0.7); color: #e3edfa; font-size: 17px; cursor: pointer; flex-shrink: 0; }
+.nburger:hover { border-color: var(--acc); }
+.mmenu { position: fixed; top: 74px; left: 16px; right: 16px; z-index: 59; display: flex; flex-direction: column; gap: 2px; background: rgba(9, 16, 30, 0.94); border: 1px solid var(--line); border-radius: 16px; backdrop-filter: blur(10px); padding: 10px; }
+.mmenu a { font-family: var(--font-jbmono), monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mut); padding: 13px 16px; border-radius: 10px; transition: color 0.25s, background 0.25s; }
+.mmenu a:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+.mmenu a.on { background: rgba(111, 195, 255, 0.14); color: var(--acc); }
+
 /* ===== Loader orbital ===== */
 #loader { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: flex; align-items: center; justify-content: center; animation: lout 0.6s ease 2.3s forwards; }
 .lglow { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(38, 90, 170, 0.3), transparent 65%); }
@@ -137,7 +144,9 @@ a:hover { color: #fff; }
 /* ===== Responsive ===== */
 @media (max-width: 760px) {
   .wrap { padding: 0 22px; }
+  .nav { padding: 14px 20px; }
   .npills { display: none; }
+  .nburger { display: flex; }
   .fgrid { grid-template-columns: 1fr; }
   .hcap { display: none; }
   #hero .wrap { transform: translateY(60px); }

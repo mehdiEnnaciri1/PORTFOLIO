@@ -15,6 +15,7 @@ const links = [
 
 export function Navbar() {
   const [active, setActive] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -50,15 +51,40 @@ export function Navbar() {
           </a>
         ))}
       </div>
-      <a
-        className="btn"
-        style={{ padding: "8px 18px", fontSize: 12 }}
-        href={`${basePath}/CV_Mehdi_ENNACIRI.pdf`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        CV ↓
-      </a>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <a
+          className="btn"
+          style={{ padding: "8px 18px", fontSize: 12 }}
+          href={`${basePath}/CV_Mehdi_ENNACIRI.pdf`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CV ↓
+        </a>
+        <button
+          type="button"
+          className="nburger"
+          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? "✕" : "☰"}
+        </button>
+      </div>
+      {open && (
+        <div className="mmenu">
+          {links.map(({ id, label }) => (
+            <a
+              key={id}
+              className={active === id ? "on" : ""}
+              href={`#${id}`}
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
