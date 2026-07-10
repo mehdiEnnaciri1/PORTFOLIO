@@ -140,4 +140,5 @@ a:hover { color: #fff; }
   .npills { display: none; }
   .fgrid { grid-template-columns: 1fr; }
   .hcap { display: none; }
+  #hero .wrap { transform: translateY(60px); }
 }
