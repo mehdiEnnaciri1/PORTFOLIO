@@ -3,8 +3,11 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 export function HeroSection() {
   return (
     <section id="hero" data-screen-label="Hero">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img id="hbg" src={`${basePath}/hero1.jpg`} alt="Mehdi Ennaciri en conférence" />
+      <picture>
+        <source media="(max-width: 760px)" srcSet={`${basePath}/hero-mobile.jpeg`} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img id="hbg" src={`${basePath}/hero1.jpg`} alt="Mehdi Ennaciri en conférence" />
+      </picture>
       <div className="hshade" />
       <div className="htint" />
       <div className="hcap mono">IANLP 2026 · Intelligent System Design Lab — Abdelmalek Essaâdi University</div>
