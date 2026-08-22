@@ -40,7 +40,7 @@ const iaDataScienceSubsections = [
     items: ["OpenCV", "YOLOv5/v8", "face_recognition"],
   },
   {
-    label: "Spécialisation PhD",
+    label: "Spécialisation Recherche",
     items: ["Causal Machine Learning"],
   },
   {

@@ -5,6 +5,31 @@ import { Briefcase } from "lucide-react";
 
 const experiences = [
   {
+    company: "DOFACTORY",
+    role: "Développeur Web & UI/UX Designer",
+    period: "avr. 2026 - juil. 2026 · 4 mois",
+    location: "Casablanca, Maroc · Hybride",
+    type: "Freelance",
+    description:
+      "Conception et développement de sites web et landing pages, avec une forte composante design et création d'agents IA.",
+    responsibilities: [
+      "Développement frontend de sites vitrines et landing pages responsives (React.js, TypeScript, HTML/CSS).",
+      "Conception d'interfaces UI/UX : maquettes, design systems, prototypage et optimisation de l'expérience utilisateur.",
+      "Conception et intégration d'agents IA conversationnels dans les projets clients.",
+      "Collaboration directe avec les clients : recueil des besoins, itérations et livraison en autonomie.",
+      "Utilisation de reverse engineering et d'outils IA de design (Claude Design, Figma) pour accélérer la conception d'interfaces.",
+    ],
+    tech: [
+      "React",
+      "TypeScript",
+      "HTML/CSS",
+      "UI/UX Design",
+      "Figma",
+      "Claude Design",
+      "Agents IA conversationnels",
+    ],
+  },
+  {
     company: "TELEXCEL",
     role: "Ingénieur informatique",
     period: "sept. 2025 - janv. 2026 · 5 mois",

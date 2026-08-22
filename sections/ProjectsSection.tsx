@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
   Bell,
+  Bot,
   LayoutDashboard,
   Phone,
   Smartphone,
@@ -90,6 +91,38 @@ function ProjectImageCarousel({
 }
 
 const projects = [
+  {
+    title: "DONNA",
+    type: "Assistant IA Desktop · Windows",
+    description:
+      "Assistant IA résident pour Windows 11 (Google Gemini / Groq) : injecte l'IA depuis n'importe quel champ de saisie de n'importe quelle application, sans jamais changer de fenêtre ni voler le focus. Se déclenche par une simple formule tapée au clavier et transforme ou génère du texte en ~1 seconde.",
+    detailsDescription:
+      "DONNA tourne en arrière-plan et permet d'appeler l'IA depuis n'importe quel champ de saisie (mail, éditeur, navigateur, bloc-notes...) via une formule tapée au clavier : <texte> donna <instruction> suivi d'un double espace. DONNA envoie le texte à l'IA, efface la formule tapée et injecte la réponse à sa place, en ~1 seconde. Elle choisit automatiquement entre 3 modes selon le contexte : génération pure (aucune source), transformation d'un texte tapé (injection Unicode, fonctionne partout), ou lecture du champ via UI Automation quand rien n'a été tapé avant la formule (avec repli automatique et transparent sur la génération pure si la lecture échoue). L'écriture dispose elle aussi d'un repli : si l'application refuse l'écriture directe (WhatsApp Web, Word...), DONNA calcule le nombre exact de Backspace à envoyer puis réinjecte la réponse par frappe clavier. Une fonction \"Annuler la dernière transformation\" permet de restaurer le texte d'origine en un clic. Développée en C# (.NET 10, WinForms), publiée en exécutable unique self-contained avec installeur Inno Setup, testée avec xUnit. Les clés API (Gemini et/ou Groq, détectées automatiquement) sont chiffrées via DPAPI et liées au compte Windows — jamais stockées en clair, et aucune journalisation par défaut.",
+    tech: [
+      "C#",
+      ".NET 10",
+      "WinForms",
+      "Google Gemini API",
+      "Groq API",
+      "UI Automation (COM)",
+      "DPAPI",
+      "xUnit",
+      "Inno Setup",
+    ],
+    features: [
+      "Déclenchement par formule clavier (\"donna\") dans n'importe quelle application, sans changer de fenêtre ni voler le focus",
+      "3 modes automatiques : génération pure, transformation de texte tapé, lecture via UI Automation",
+      "Injection de texte universelle par frappe Unicode, avec repli clavier intelligent si l'écriture directe est refusée",
+      "Multi-fournisseurs IA (Google Gemini, Groq) avec bascule automatique en cas d'échec (quota, clé invalide...)",
+      "Clés API chiffrées via DPAPI, liées au compte Windows, jamais stockées en clair",
+      "Fonction \"Annuler la dernière transformation\" (undo à un niveau)",
+      "Publication en exécutable unique self-contained (.NET 10) + installeur Inno Setup",
+      "Suite de tests xUnit pour la logique de détection et de nettoyage de la réponse",
+    ],
+    links: { github: "https://github.com/mehdiEnnaciri1/DONNA" },
+    icon: <Bot className="h-5 w-5 text-sky-300" />,
+    image: "donna.ico",
+  },
   {
     title: "Clementia",
     type: "Plateforme IA · Full-Stack",

@@ -3,14 +3,14 @@ export function AboutSection() {
     <div className="grid gap-9 md:grid-cols-[1.2fr_1fr] md:items-start">
       <div className="rv">
         <p className="text-lg font-semibold leading-relaxed text-[#dfeaf8] mb-5">
-          Software Engineer spécialisé en IA &amp; Full-Stack, actuellement Doctorant en Causal
+          Software Engineer spécialisé en IA &amp; Full-Stack, avec une expertise en Causal
           Machine Learning. Je conçois des systèmes complexes alliant performance back-end et
           intelligence artificielle.
         </p>
         <p className="text-[15px] leading-[1.75] text-[#b9c9de] mb-4">
-          Ingénieur en informatique (Master, Abdelmalek Essaâdi), doctorant en IA sur la causalité
-          et le Causal Machine Learning — combinant LLMs et inférence causale formelle pour
-          extraire des règles actionnables de données réelles.
+          Ingénieur en informatique (Master, Abdelmalek Essaâdi), passionné par l&apos;IA appliquée
+          à la causalité et au Causal Machine Learning — combinant LLMs et inférence causale
+          formelle pour extraire des règles actionnables de données réelles.
         </p>
         <p className="text-[15px] leading-[1.75] text-[#b9c9de]">
           Polyvalent — de la vision par ordinateur (UFC, Ellendir) aux dashboards réseau à grande
@@ -23,9 +23,6 @@ export function AboutSection() {
       <div className="panel rv p-7">
         <div className="mb-4 flex items-center justify-between gap-2">
           <span className="mono text-[13px] text-[#c6d6ec]">Research Focus: Causal ML &amp; LLMs</span>
-          <span className="chip chipa mono" style={{ fontSize: 10, letterSpacing: ".15em" }}>
-            PHD STUDENT
-          </span>
         </div>
         <div className="grid grid-cols-2 gap-4">
           {[

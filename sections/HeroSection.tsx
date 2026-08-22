@@ -19,7 +19,7 @@ export function HeroSection() {
             Ennaciri<span className="acc">.</span>
           </span>
         </h1>
-        <p className="hsub a4">PhD Student | Software Engineer &amp; Full-Stack Developer</p>
+        <p className="hsub a4">Software Engineer &amp; Full-Stack Developer</p>
         <div className="a4" style={{ marginBottom: 26 }}>
           <span className="hbadge">
             <span className="hdot" />

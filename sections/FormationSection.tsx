@@ -7,13 +7,6 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const items = [
   {
-    title: "Doctor of Philosophy - PhD, Artificial Intelligence & Causal Machine Learning",
-    institution: "Université Abdelmalek Essaâdi",
-    period: "2025 – aujourd'hui",
-    description:
-      "Formation doctorale en intelligence artificielle avec focus sur l'apprentissage causal et l'inférence causale.",
-  },
-  {
     title: "Master Spécialisé, Computer Engineering",
     institution: "Université Abdelmalek Essaâdi",
     period: "2023 – 2025",
